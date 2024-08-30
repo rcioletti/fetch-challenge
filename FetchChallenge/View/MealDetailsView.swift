@@ -42,16 +42,23 @@ struct MealDetailsView: View {
                 } placeholder: {
                     ProgressView()
                 }
+                Divider()
                 Text("Instructions")
                     .font(.headline)
                     .padding()
+                Divider()
                 Text(mealDetails.instructions)
+                    .padding()
+                Divider()
                 Text("Ingredients")
                     .font(.headline)
                     .padding()
-                ingredients(of: mealDetails)
+                Divider()
+                VStack{
+                    ingredients(of: mealDetails)
+                }
+                .padding()
             }
-            .padding()
         }
     }
     
@@ -59,8 +66,10 @@ struct MealDetailsView: View {
         let measures = mealDetails.getMeasures()
         let ingredients = mealDetails.getIngredients()
         
+        
         return ForEach(0..<measures.count, id: \.self) { index in
             Text("\u{2022} \(measures[index]) \(ingredients[index])")
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
